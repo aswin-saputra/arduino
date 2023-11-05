@@ -60,7 +60,7 @@ void setNumberSeq(uint8_t awal = 0, uint8_t akhir = 9, uint8_t speed = 10) {
 // }
 
 void setup() {
-  Serial.begin(9600);
+  // Serial.begin(9600);
   // DDRD |= 0b11111110;
   // DDRB |= 0b00110000;
   DDRD |= 0xFE;
