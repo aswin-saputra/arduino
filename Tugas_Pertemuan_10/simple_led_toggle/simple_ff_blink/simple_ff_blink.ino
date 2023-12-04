@@ -31,7 +31,7 @@ Aswin Saputra 3112210006
 
 /*make data structur for led properties*/
 struct led_patern {
-  uint8_t patern[3];
+  uint8_t patern[6];
   // uint8_t n_led;
   // volatile uint8_t *led_pin_ddr;
   // volatile uint8_t *led_pin_port;
@@ -68,16 +68,21 @@ void ff_blink(uint8_t array_patern, unsigned int ms = 100) {
 /*main function*/
 int main(void) {
   DDRD |= 0xF0; /* Set Pin 4 5 6 7 as Output */
-  struct led_patern mypaterng:\EE-RnD\microcontroller\Arduino\PraktikumMCU23Ganjil\.gitignore1 = { { 3, 5, 9 } };
+  /*
+  kombinasi dari 4 buah LED yang menyala hanya 2 = 6 kombinasi
+  nCr(4,2) = 6
+  0011 dan ~(0011) 
+  0101 dan ~(0101)
+  0110 dan ~(0110)
+   */
+  struct led_patern mypatern1 = { { 3, 5, 9 } };
 
-  /*Make loop*/
-  while (1) {
 
 /* ***********************************************
-    ff_blink(mypatern1.patern[0]);
-
-       Equivalent to :
-
+**   PATERN 1 :  0011 --> 1100
+**    ff_blink(mypatern1.patern[0]);
+**    Equivalent to :
+**
 **    PORTD |= 0x30;    turn on led pin 5 4   PORTD
 **    _delay_ms(100); 
 **   
@@ -89,17 +94,13 @@ int main(void) {
 **
 **    PORTD &= ~0xC0;   turn off led pin 7 6 PORTD
 **    _delay_ms(100);
-*/
-    ff_blink(mypatern1.patern[0]);
-// ***********************************************
-
-    // _delay_ms(DELAY_TIME);
+************************************************/ 
 
 /* ***********************************************
-    ff_blink(mypatern1.patern[1],20);
-
-       Equivalent to :
-
+**   PATERN 2 :  0101 --> 1010
+**    ff_blink(mypatern1.patern[1],20);
+**    Equivalent to :
+**
 **    PORTD |= 0x50;    turn on led pin 6 4  PORTD
 **    _delay_ms(20); 
 **   
@@ -111,17 +112,13 @@ int main(void) {
 **
 **    PORTD &= ~0xA0;   turn off led pin 7 5 PORTD
 **    _delay_ms(20);
-*/
-    // ff_blink(mypatern1.patern[1], 20);
-// ***********************************************
-
-    // _delay_ms(DELAY_TIME);
-
+************************************************/
+ 
 /************************************************
-    ff_blink(mypatern1.patern[2],500);
-
-       Equivalent to :
-
+**   PATERN 3 :  1001 --> 0110
+**    ff_blink(mypatern1.patern[2],500);
+**    Equivalent to :
+**
 **    PORTD |= 0x90;    turn on led pin 7 4  PORTD
 **    _delay_ms(500)); 
 **   
@@ -133,13 +130,23 @@ int main(void) {
 **
 **    PORTD &= ~0x60;   turn off led pin 6 5 PORTD
 **    _delay_ms(500));
-*/
+************************************************/
+
+/************************************************
+** Another Patern
+    ff_blink(3);
+    ff_blink(5);
+    ff_blink(6);
+    ff_blink(9);
+    ff_blink(10);
+    ff_blink(12);
+************************************************/
+
+  /*Make loop*/
+  while (1) {
+    ff_blink(mypatern1.patern[0]);
+    // ff_blink(mypatern1.patern[1], 20);
     // ff_blink(mypatern1.patern[2], 500);
-// *********************************************** 
-    // _delay_ms(DELAY_TIME);
-    // ff_blink(mypatern1.patern[0], 50);
-    // ff_blink(mypatern1.patern[1], 50);
-    // ff_blink(mypatern1.patern[2], 50);
   }
   return 0;
 }
