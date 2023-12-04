@@ -8,6 +8,8 @@
 # Ignore all local history of files
 .history
 .ionide
+.vscode
+.vscode/*
 
 # Support for Project snippet scope
 .vscode/*.code-snippets
