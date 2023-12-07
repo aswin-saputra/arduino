@@ -17,7 +17,7 @@ Aswin Saputra 3112210006
   398 bytes (1%) of program storage space
   Global variables use 0 bytes (0%) of dynamic memory
 */
-
+#include <arduino.h>
 #include <avr/io.h>
 
 #ifndef F_CPU
@@ -28,6 +28,10 @@ Aswin Saputra 3112210006
 #define DELAY_TIME 300
 
 #define N_PIN 4
+
+/*function declaration*/
+void ff_blink(uint8_t array_patern, unsigned int);
+void wait(unsigned int ms);
 
 /*make data structur for led properties*/
 struct led_patern {

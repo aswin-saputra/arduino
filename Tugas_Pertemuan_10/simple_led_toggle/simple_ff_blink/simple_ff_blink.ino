@@ -69,11 +69,11 @@ void ff_blink(uint8_t array_patern, unsigned int ms = 100) {
 int main(void) {
   DDRD |= 0xF0; /* Set Pin 4 5 6 7 as Output */
   /*
-  kombinasi dari 4 buah LED yang menyala hanya 2 = 6 kombinasi
+  4 buah LED dan yang menyala hanya 2 dalam 1 waktu mengjasilkan 6 kombinasi
   nCr(4,2) = 6
   0011 dan ~(0011) 
-  0101 dan ~(0101)
   0110 dan ~(0110)
+  0101 dan ~(0101)
    */
   struct led_patern mypatern1 = { { 3, 5, 9 } };
 
