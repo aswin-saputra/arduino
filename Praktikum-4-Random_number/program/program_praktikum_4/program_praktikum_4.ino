@@ -26,6 +26,8 @@ float durasi;
 float RPs;
 float RPM;
 
+#define TRIGGER_LED 251
+
 void setup()
 {
     Serial.begin(9600);
@@ -48,7 +50,8 @@ void ledAction()
     // Bagian LED
 
     Serial.print("LED Status\t\t: ");
-    if (randomNumber > 500)
+    // if (randomNumber > 500)
+    if (randomNumber > TRIGGER_LED)
     {
         digitalWrite(LED_BUILTIN, HIGH);
         Serial.println("LED ON");
@@ -117,7 +120,6 @@ void rpmCalculation()
 void loop()
 {
     Serial.println("------------------\\o0o/\\^c^/\\o0o/------------------");
-
     numGen();
     delay(10);
     ledAction();
@@ -127,5 +129,5 @@ void loop()
     rpmCalculation();
     Serial.println("-------------------------*0*--------------------------");
     Serial.println("\n\n");
-    delay(1000);
+    delay(200);
 }
