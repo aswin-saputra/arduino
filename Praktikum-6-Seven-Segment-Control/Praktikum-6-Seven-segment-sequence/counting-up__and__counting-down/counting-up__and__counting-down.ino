@@ -26,19 +26,14 @@
 #define MAX_VAL 9
 
 #ifndef DIGIT_CHECK
-#define DIGIT_CHECK(a, b) ( \
-                            ((a >= MIN_VAL) && (a <= MAX_VAL)) \
-                            && \ 
-                ((b >= MIN_VAL) && (b <= MAX_VAL))) \
-                            ? 1 \
-                            : 0
+#define DIGIT_CHECK(a, b) (((a >= MIN_VAL) && (a <= MAX_VAL)) && ((b >= MIN_VAL) && (b <= MAX_VAL))) ? 1 : 0
 #endif
 
 /*
 
 Smentara untuk PIN diset tetap::
 a  b  c d e f g dl
-12 12 7 6 5 4 3 2
+13 12 7 6 5 4 3 2
 
 */
 
@@ -55,7 +50,7 @@ a  b  c d e f g dl
 //   0xF6,  // Angka 9
 // };
 // const uint8_t PROGMEM sevsegNumbers[10] = {SEVEN_SEGMENT_NUM_ELE };
-const uint8_t sevsegNumbers[10] = {SEVEN_SEGMENT_NUM_ELE };
+const uint8_t sevsegNumbers[10] = { SEVEN_SEGMENT_NUM_ELE };
 
 bool comAnodeToggle = 1;
 void comAnode(bool sst) {
@@ -97,12 +92,13 @@ void dotBlink(uint8_t ms) {
   if (comAnodeToggle) {
     PORTD |= 0xF8;
     PORTB |= 0x30;
-    delay(ms * 2);
+    delay(ms);
     PORTD ^= 0x0D;
     delay(ms);
   } else {
-    PORTD |= 0x03;
-    PORTB |= 0x00;
+    PORTD &= 0x00;
+    PORTD |= 0x05;
+    PORTB &= 0x00;
     delay(ms * 2);
     PORTD ^= 0x0D;
     delay(ms);
@@ -113,7 +109,7 @@ void dotBlink(uint8_t ms) {
 void dash(uint8_t n = 5) {
   uint8_t ii = 0;
   do {
-    dotBlink(100);
+    dotBlink(50);
     // setNumberSeq(10, 10, 1000);
     delay(n);
     ii++;
@@ -149,7 +145,7 @@ void setNumberSeq(uint8_t awal = 0, uint8_t akhir = 9, uint8_t speed = 25) {
       delay(5000 / speed);
     }
   } else if (!valChk) {
-    dotBlink(100);
+    dotBlink(50);
   } else {
     segmentBlink(awal);
   }
@@ -160,7 +156,8 @@ void setup() {
   DDRD |= 0xFE;
   DDRB |= 0x30;
   PORTD |= 0x02;
-  comAnode(1);  // Set 1 unutk com anode dan set 0 jika com cathode
+  // comAnode(1);  // Set 1 unutk com anode dan set 0 jika com cathode
+  comAnode(0);  // Set 1 unutk com anode dan set 0 jika com cathode
   dotBlink(200);
 }
 
@@ -187,12 +184,21 @@ void loop() {
   // setNumberSeq(90,99,10);
   // delay(1000);
 
+  setNumberSeq();
   setNumberSeq(3, 1, 15);
-  delay(500);
+  delay(100);
   dash(10);
-  delay(500);
-  setNumberSeq(0, 9, 12);
-  delay(500);
-  setNumberSeq(9, 0, 12);
-  delay(500);
-}
+  delay(100);
+  delay(100);
+  setNumberSeq(0, 9, 50);
+  delay(100);
+  setNumberSeq(9, 0, 50);
+  delay(100);
+  setNumberSeq(5, 8, 100);
+
+  for (int ii = 0; ii < 10; ++ii) {
+    for (int jj =10; jj > 0; --jj) {
+      setNumberSeq(jj == ii ? --jj:ii, jj == ii ? ++ii:jj, 50);
+      setNumberSeq(jj == ii ? --jj:jj, jj == ii ? ++ii:ii, 50);
+    }}
+  }
