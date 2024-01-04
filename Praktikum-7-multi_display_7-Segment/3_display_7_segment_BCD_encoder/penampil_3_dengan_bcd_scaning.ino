@@ -5,7 +5,7 @@ Penampil 7 segmen Dengan BCD dan SCANING
 */
 
 /* 3 display Common cathode
-   encoder BCD to 7segment  CD 4511
+    encoder BCD to 7segment  CD 4511
 */
 #define pina 2
 #define pinb 3

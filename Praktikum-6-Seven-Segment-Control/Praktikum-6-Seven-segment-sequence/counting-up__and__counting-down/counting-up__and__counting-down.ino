@@ -185,20 +185,20 @@ void loop() {
   // delay(1000);
 
   setNumberSeq();
-  setNumberSeq(3, 1, 15);
   delay(100);
+  setNumberSeq(0, 9, 20);
+  delay(100);
+  setNumberSeq(9, 0, 30);
+  delay(100);
+  setNumberSeq(0, 5, 200);
   dash(10);
+  setNumberSeq(7, 6, 100);
   delay(100);
-  delay(100);
-  setNumberSeq(0, 9, 50);
-  delay(100);
-  setNumberSeq(9, 0, 50);
-  delay(100);
-  setNumberSeq(5, 8, 100);
 
   for (int ii = 0; ii < 10; ++ii) {
     for (int jj =10; jj > 0; --jj) {
       setNumberSeq(jj == ii ? --jj:ii, jj == ii ? ++ii:jj, 50);
       setNumberSeq(jj == ii ? --jj:jj, jj == ii ? ++ii:ii, 50);
     }}
+  delay(100);
   }
