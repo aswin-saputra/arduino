@@ -54,10 +54,12 @@ void setup()
     }
     LCD0.begin(16, 2);
     servoOne.attach(11);
+    struct sensorTmp tmp36;
     struct sensorTmp lm35;
     /*lm35 pin A0 offset Increase Factor*/
     tempInit(&tmp36, A1, 500, 10);
     tempInit(&lm35, A0, 0, 10);
+
     getdata(&lm35);
     servoOne.write(0);
 
@@ -67,13 +69,6 @@ void setup()
         getdata(&lm35);
         sendToDisplay(&lm35);
         servoSet(&lm35);
-
-        if (DEBUG)
-        {
-            Serial.println(lm35.adcValue);
-            Serial.println(lm35.mV);
-            Serial.println(lm35.tempC);
-        }
     }
 }
 
@@ -107,6 +102,16 @@ void getdata(struct sensorTmp *sensor)
     sensor->adcValue = analogRead(sensor->pin);
     sensor->mV = float(sensor->adcValue) / ADC_BIT * MILLI_VOLT_REF;
     sensor->tempC = (sensor->mV - sensor->voffset) / sensor->factor;
+    if (DEBUG)
+    {
+        Serial.println("GET DATA BLOCK");
+        Serial.print("ADC :");
+        Serial.println(sensor->adcValue);
+        Serial.print("Voltage (mV):");
+        Serial.println(sensor->mV);
+        Serial.print("TEMP :");
+        Serial.println(sensor->tempC);
+    }
 }
 
 /*
