@@ -40,7 +40,7 @@ void loop() {
     LCD0.setCursor(0, 0);
     LCD0.print(TEXT);
   delay(500);
-    for(int ii = 0 ; ii <= (strlen(TEXT)-16) ; ++ii){
+    for(int ii = 0 ; ii <= ((strlen(TEXT))-16) ; ++ii){
     LCD0.scrollDisplayLeft();
     delay(200); 
     }
